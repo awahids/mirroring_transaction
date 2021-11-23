@@ -3,6 +3,9 @@
 
 # Rest API PrivyId
 
+## Framework
+A user simple API build using **[expressJS](https://expressjs.com/)** framework with **[PostgreSQL](https://www.postgresql.org/)** for database.
+
 ## How to install
 Make sure you already install all the requirements then clone or download the repository.
 ```bash
@@ -47,7 +50,7 @@ $ npm start
 ## End Point REST API
 
 ### User Sign Up and Sign In
-When signing up the password will be automatically **encrypted** and when logging in it will return a **token** to be used to store logged in user data
+When signing up the password will be automatically **encrypted** using `JWT` and when logging in it will return a **token** to be used to store logged in user data. 
 
 An example of a token that will be *returned when the user logs in* and each token only has an active period of **1 hour**
 ```bash
