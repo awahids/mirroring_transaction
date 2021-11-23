@@ -18,16 +18,15 @@ $ npm i
 ```
 to install all the dependencies.
 ### Set up .env
-Make  `.env`  file on  **each**  Node folder for the environment variables
+make a duplicate of the `.env template` file and rename it to `.env`, then fill in all the required environments, for example
 ```bash
-DB_USER=""
-DB_NAME=""
-DB_PASS=""
-DB_HOST=""
+DB_USER="postgres"
+DB_NAME="privyid"
+DB_PASS="privyId123"
+DB_HOST="127.0.0.1"
 
-PWD_TOKEN=""
+PWD_TOKEN="privy_secret_id"
 ```
-
 ## Create Database and seeder
 create database using `npm`
 ```bash
@@ -51,9 +50,7 @@ $ npm start
 
 ### User Sign Up and Sign In
 When signing up the password will be automatically **encrypted** using `JWT` and when logging in it will return a **token** to be used to store logged in user data. 
-
 > To login, you can only use your **username** and **password**
-
 ```json
 {
 	username  	: "privyid",
