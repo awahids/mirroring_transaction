@@ -52,6 +52,19 @@ $ npm start
 ### User Sign Up and Sign In
 When signing up the password will be automatically **encrypted** using `JWT` and when logging in it will return a **token** to be used to store logged in user data. 
 
+> To login, you can only use your **username** and **password**
+
+```json
+{
+	username  	: "privyid",
+	email  		: "wahid@privy.id",
+	password  	: "password"
+}, {
+	username  	: "privyid1",
+	email  		: "aws@privy.id",
+	password  	: "password"
+}
+```
 An example of a token that will be *returned when the user logs in* and each token only has an active period of **1 hour**
 ```bash
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InByaXZ5aWQiLCJpZCI6MSwiaWF0IjoxNjM3NjkxNDYxLCJleHAiOjE2Mzc2OTUwNjF9.IFZi35EYDyU4-rTjXtnWiI3JR8b63M2eamUkFxjD2Lo
