@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { Users, UserBalances } = require("../models");
 const Joi = require("joi");
 const { authHash } = require("../utils/helpers/auth");
 const Bcrypt = require("bcrypt");
@@ -8,7 +8,7 @@ require("dotenv").config();
 module.exports = {
   signUp: async (req, res) => {
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password, balance } = req.body;
       const body = req.body;
 
       const schema = Joi.object({
@@ -27,9 +27,13 @@ module.exports = {
         });
       }
 
-      const checkUsername = await User.findOne({
+      const checkUsername = await Users.findOne({
         where: { username: username },
       });
+      console.log(
+        "🚀 ~ file: auth.controller.js ~ line 33 ~ signUp: ~ checkUsername",
+        checkUsername
+      );
 
       if (checkUsername) {
         return res.status(400).json({
@@ -40,11 +44,22 @@ module.exports = {
 
       const hashPassword = await authHash(password);
 
-      const signUp = await User.create({
+      const signUp = await Users.create({
         username,
         email,
         password: hashPassword,
       });
+
+      const createUserBalance = await UserBalances.create({
+        balance: balance,
+      });
+
+      if (!createUserBalance) {
+        return res.status(400).json({
+          status: "Failed",
+          message: "Cannot create user balance",
+        });
+      }
 
       if (!signUp) {
         return res.status(400).json({
@@ -59,6 +74,10 @@ module.exports = {
         data: signUp,
       });
     } catch (error) {
+      console.log(
+        "🚀 ~ file: auth.controller.js ~ line 62 ~ signUp: ~ error",
+        error
+      );
       return res.status(500).json({
         status: "Failed",
         message: "Internal Server Error",
@@ -71,7 +90,7 @@ module.exports = {
     const body = req.body;
 
     try {
-      const checkUsername = await User.findOne({
+      const checkUsername = await Users.findOne({
         where: { username: username },
       });
 

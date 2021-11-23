@@ -1,27 +1,45 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("UserBalances", {
+    await queryInterface.createTable("UserBalanceHistories", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
+      userBalanceId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Users",
+          model: "UserBalances",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      balance: {
+      balanceBefore: {
         type: Sequelize.INTEGER,
       },
-      balanceAchieve: {
+      balanceAfter: {
         type: Sequelize.INTEGER,
+      },
+      activity: {
+        type: Sequelize.STRING,
+      },
+      type: {
+        type: Sequelize.ENUM("Debit", "Kredit"),
+      },
+      ip: {
+        type: Sequelize.STRING,
+      },
+      location: {
+        type: Sequelize.STRING,
+      },
+      userAgent: {
+        type: Sequelize.STRING,
+      },
+      author: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +52,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("UserBalances");
+    await queryInterface.dropTable("UserBalanceHistories");
   },
 };
