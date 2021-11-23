@@ -51,7 +51,8 @@ module.exports = {
       });
 
       const createUserBalance = await UserBalances.create({
-        balance: balance,
+        balance: 0,
+        userId: signUp.id,
       });
 
       if (!createUserBalance) {
@@ -131,6 +132,10 @@ module.exports = {
         }
       );
     } catch (error) {
+      console.log(
+        "🚀 ~ file: auth.controller.js ~ line 135 ~ signIn: ~ error",
+        error
+      );
       return res.status(500).json({
         status: "Failed",
         message: "Internal Server Error",
